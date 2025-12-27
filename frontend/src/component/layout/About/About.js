@@ -15,7 +15,7 @@ const About = () => {
           <div>
             <Avatar
               style={{ width: "10vmax", height: "10vmax", margin: "2vmax 0" }}
-              src="https://res.cloudinary.com/dv3iw1cln/image/upload/v1719163071/avatars/qp26qk5owcpjf0ileq68.jpg"
+              src="https://res.cloudinary.com/dv3iw1cln/image/upload/v1724500064/WhatsApp_Image_2024-03-13_at_12.26.10_PM_1_yk5qoq.jpg"
               alt="Founder"
             />
 

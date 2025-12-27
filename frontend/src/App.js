@@ -3,6 +3,7 @@ import { useEffect, useState, Suspense, lazy } from "react";
 import Header from "./component/layout/Header/Header.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import React from "react";
+import axios from "axios";
 import Footer from "./component/layout/Footer/Footer";
 import Home from "./component/Home/Home";
 import store from "./store";

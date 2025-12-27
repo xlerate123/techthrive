@@ -9,10 +9,6 @@ if (process.env.NODE_ENV !== "PRODUCTION") {
 const app = require("./app");
 const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/database");
-const cors = require('cors')
-
-// Enable CORS for all routes and origins
-app.use(cors());
 
 // Handling Uncaught Exception
 process.on("uncaughtException", (err) => {

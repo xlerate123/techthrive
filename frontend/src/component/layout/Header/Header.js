@@ -1,6 +1,10 @@
 import React from "react";
 import { ReactNavbar } from "overlay-navbar";
 import logo from "../../../images/techthrive.png";
+import {MdAccountCircle } from "react-icons/md";
+import {MdSearch } from "react-icons/md";
+import {MdAddShoppingCart } from "react-icons/md";
+
 
 const options = {
   burgerColorHover: "#89CFF0",
@@ -26,9 +30,15 @@ const options = {
   link1ColorHover: "#218838",
   link1Margin: "1vmax",
   profileIconUrl: "/login",
+  profileIcon: "true",
   profileIconColor: "rgba(35, 35, 35,0.8)",
+  ProfileIconElement: MdAccountCircle,
+  searchIcon: "true",
   searchIconColor: "rgba(35, 35, 35,0.8)",
+  SearchIconElement: MdSearch,
+  cartIcon: "true",
   cartIconColor: "rgba(35, 35, 35,0.8)",
+  CartIconElement: MdAddShoppingCart,
   profileIconColorHover: "#eb4034",
   searchIconColorHover: "#eb4034",
   cartIconColorHover: "#eb4034",

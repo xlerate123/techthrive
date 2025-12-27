@@ -7,13 +7,13 @@ const Contact = () => {
 <div className="contactContainer">
       <div className="contactDetails">
         <a className="mailBtn" href="mailto:nikhilmohanty443@gmail.com">
-          <Button>Email: nikhilmohanty443@gmail.com</Button>
+          <Button>Email: example@gmail.com</Button>
         </a>
         <div className="phone">
-          <Button>Phone: +91 8328944109</Button>
+          <Button>Phone: +91 9090909090</Button>
         </div>
         <div className="address">
-          <Button>Address: Near Shree dham complex,Asha kiran Road , Bargarh</Button>
+          <Button>Address: Odisha, India, Earth</Button>
         </div>
       </div>
     </div>
