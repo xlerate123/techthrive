@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 
+// Core product schema for the marketplace
 const productSchema = mongoose.Schema({
   name: {
     type: String,
@@ -77,5 +78,17 @@ const productSchema = mongoose.Schema({
     default: Date.now,
   },
 });
+
+/**
+ * Indexes for fast queries on large product collections (e.g. 250k+ docs)
+ *
+ * 1) Text index on name, description and category:
+ *    - Enables efficient full‑text search instead of full collection scans.
+ * 2) Single‑field / compound indexes on frequently filtered fields:
+ *    - category + price are typically used for listing and faceted search.
+ */
+productSchema.index({ name: "text", description: "text", category: "text" });
+productSchema.index({ name: 1 });
+productSchema.index({ category: 1, price: 1 });
 
 module.exports = mongoose.model("Product", productSchema);

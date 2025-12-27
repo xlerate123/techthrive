@@ -1,22 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
 
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+<head>
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
 
-    <title>TechThrive</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-  </body>
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+  <!-- Preconnect to Google Fonts for faster font loading -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- Preload critical banner image -->
+  <link rel="preload" as="image" href="/static/media/cover3.jpg" />
+
+  <!-- Inline critical CSS for immediate visual feedback -->
+  <style>
+    /* Critical CSS for loader - shown before JS loads */
+    .loading {
+      width: 100vw;
+      height: 100vh;
+      background-color: #fff;
+      display: grid;
+      place-items: center;
+    }
+
+    .loading>div {
+      width: 10vmax;
+      height: 10vmax;
+      border-bottom: 5px solid rgba(0, 0, 0, 0.719);
+      border-radius: 50%;
+      animation: loadingRotate 800ms linear infinite;
+    }
+
+    @keyframes loadingRotate {
+      to {
+        transform: rotateZ(-360deg);
+      }
+    }
+
+    /* Fallback fonts while webfonts load */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, sans-serif;
+    }
+  </style>
+
+  <title>TechThrive</title>
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+  <!-- Initial loading indicator - shown before React hydrates -->
+  <div id="root">
+    <div class="loading">
+      <div></div>
+    </div>
+  </div>
+</body>
+
 </html>

@@ -116,6 +116,7 @@ const ProductDetails = ({ match }) => {
                       key={i}
                       src={item.url}
                       alt={`${i} Slide`}
+                      loading="lazy"
                     />
                   ))}
               </Carousel>

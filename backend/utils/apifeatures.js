@@ -5,16 +5,23 @@ class ApiFeatures {
   }
 
   search() {
-    const keyword = this.queryStr.keyword
-      ? {
-          name: {
-            $regex: this.queryStr.keyword,
-            $options: "i",
-          },
-        }
-      : {};
+    /**
+     * Text search using MongoDB indexes
+     *
+     * - When "keyword" is present in the query string, use a $text query.
+     * - This leverages the text index defined on the Product schema
+     *   (name, description, category) for sub‑second search on large datasets.
+     */
+    if (this.queryStr.keyword) {
+      const keyword = this.queryStr.keyword;
 
-    this.query = this.query.find({ ...keyword });
+      this.query = this.query
+        .find({ $text: { $search: keyword } })
+        // Sort by text search relevance score when available
+        .sort({ score: { $meta: "textScore" } })
+        .select({ score: { $meta: "textScore" } });
+    }
+
     return this;
   }
 

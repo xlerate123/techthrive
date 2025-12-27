@@ -29,10 +29,10 @@ const Home = () => {
           <MetaData title="TechThrive" />
 
           <div className="banner">
-            
+
             <h1>WELCOME TO TECHTHRIVE</h1>
             <p>Your Tech Hub</p>
-            
+
             <a href="#container">
               <button>
                 Scroll

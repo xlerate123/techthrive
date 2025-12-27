@@ -60,13 +60,13 @@ const OrderDetails = ({ match }) => {
                   <p
                     className={
                       order.paymentInfo &&
-                      order.paymentInfo.status === "succeeded"
+                        order.paymentInfo.status === "succeeded"
                         ? "greenColor"
                         : "redColor"
                     }
                   >
                     {order.paymentInfo &&
-                    order.paymentInfo.status === "succeeded"
+                      order.paymentInfo.status === "succeeded"
                       ? "PAID"
                       : "NOT PAID"}
                   </p>
@@ -100,7 +100,7 @@ const OrderDetails = ({ match }) => {
                 {order.orderItems &&
                   order.orderItems.map((item) => (
                     <div key={item.product}>
-                      <img src={item.image} alt="Product" />
+                      <img src={item.image} alt="Product" loading="lazy" />
                       <Link to={`/product/${item.product}`}>
                         {item.name}
                       </Link>{" "}

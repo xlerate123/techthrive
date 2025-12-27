@@ -3,6 +3,7 @@ const ErrorHander = require("../utils/errorhander");
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 const ApiFeatures = require("../utils/apifeatures");
 const cloudinary = require("cloudinary");
+const redisClient = require("../config/redis.js");
 
 // Create Product -- Admin
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
@@ -76,15 +77,46 @@ exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
 
 // Get Product Details
 exports.getProductDetails = catchAsyncErrors(async (req, res, next) => {
-  const product = await Product.findById(req.params.id);
+  const productId = req.params.id;
+  const cacheKey = `product:${productId}`;
+
+  // Try Redis cache first (hot path for frequently viewed products)
+  try {
+    const cached = await redisClient.get(cacheKey);
+    if (cached) {
+      const productFromCache = JSON.parse(cached);
+
+      return res.status(200).json({
+        success: true,
+        product: productFromCache,
+        // Optional flag to help with debugging / understanding behavior
+        source: "cache",
+      });
+    }
+  } catch (cacheError) {
+    // If Redis fails, continue to database (graceful degradation)
+    console.error("Redis cache error:", cacheError.message);
+  }
+
+  const product = await Product.findById(productId);
 
   if (!product) {
     return next(new ErrorHander("Product not found", 404));
   }
 
+  // Cache the product for 10 minutes to speed up subsequent requests
+  // node-redis uses setEx(key, seconds, value) instead of set(key, value, 'EX', seconds)
+  try {
+    await redisClient.setEx(cacheKey, 600, JSON.stringify(product));
+  } catch (cacheError) {
+    // If caching fails, still return the product (graceful degradation)
+    console.error("Redis cache set error:", cacheError.message);
+  }
+
   res.status(200).json({
     success: true,
     product,
+    source: "database",
   });
 });
 

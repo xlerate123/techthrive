@@ -3,6 +3,7 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
+const cors = require("cors");
 const path = require("path");
 
 const errorMiddleware = require("./middleware/error");
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
 // Route Imports
 const product = require("./routes/productRoute");
@@ -31,7 +33,7 @@ app.use("/api/v1", payment);
 //app.use(express.static(path.join(__dirname, "../frontend/build")));
 
 //app.get("*", (req, res) => {
-  //res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+//res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
 //});
 
 // Middleware for Errors

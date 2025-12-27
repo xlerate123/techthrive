@@ -1,3 +1,11 @@
+// Load environment variables FIRST, before any other imports
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({ path: "backend/config/config.env" });
+} else {
+  // In production, still load dotenv
+  require("dotenv").config({ path: "backend/config/config.env" });
+}
+
 const app = require("./app");
 const cloudinary = require("cloudinary");
 const connectDatabase = require("./config/database");
@@ -12,11 +20,6 @@ process.on("uncaughtException", (err) => {
   console.log(`Shutting down the server due to Uncaught Exception`);
   process.exit(1);
 });
-
-// Config
-if (process.env.NODE_ENV !== "PRODUCTION") {
-  require("dotenv").config({ path: "backend/config/config.env" });
-}
 
 // Connecting to database
 connectDatabase();
